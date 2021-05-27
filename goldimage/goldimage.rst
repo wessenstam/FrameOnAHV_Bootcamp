@@ -17,7 +17,7 @@ Deploying a VM
 
 #. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
 
-   .. figure:: images/1.png
+   .. figure:: images/pc2021.3.x/1.png
 
 #. Click **Create VM**.
 
@@ -74,6 +74,8 @@ Running Citrix Optimizer
 #. Right-click **CitrixOptimizer.exe** and select **Run as Administrator**.
 
  .. figure:: images/12.png
+
+#. In the *New version is avaialble* screen, click **Skip**
 
 #. Select the recommended optimization template based on the Windows build being used for the gold image.
 
@@ -138,7 +140,7 @@ Additionally, during the brokering workflow, the Frame agent works in conjunctio
 #. Under **Disks > CD-ROM**, select :fa:`pencil` and fill out the following fields:
 
    - **Operation** - Clone from Image Service
-   - **Image** - FrameGuestAgentInstaller_1.0.2.2_7930.iso
+   - **Image** - FrameGuestAgentInstaller_1.0.2.8.iso
 
 #. Click **Update > Save**.
 
@@ -160,7 +162,7 @@ Additionally, during the brokering workflow, the Frame agent works in conjunctio
 
    .. figure:: images/22.png
 
-#. Open **D:\\FrameGuestAgentInstall_1.0.2.2_7930.exe** to launch the Frame Guest Agent installer.
+#. Open **D:\\FrameGuestAgentInstall_1.0.2.8.exe** to launch the Frame Guest Agent installer.
 
 #. Agree to the license agreement and click **Install**.
 
@@ -168,7 +170,7 @@ Additionally, during the brokering workflow, the Frame agent works in conjunctio
 
 #. When prompted, click **Restart** to complete the installation.
 
-#. After approximately 60 seconds, connect to the VM via RDP and execute the following in **PowerShell** (*This is done to put the Golden Image into a clean SysPrep state*):
+#. After approximately 120 seconds, connect to the VM via RDP and execute the following in **PowerShell** (*This is done to put the Golden Image into a clean SysPrep state*):
 
     .. note::
 
@@ -185,6 +187,8 @@ Additionally, during the brokering workflow, the Frame agent works in conjunctio
    .. figure:: images/23.png
 
 You have successfully created a gold master image to use for your Xi Frame workloads.
+
+------
 
 Takeaways
 +++++++++

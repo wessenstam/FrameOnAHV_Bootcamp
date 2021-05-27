@@ -74,7 +74,7 @@ Adding Prism Service Account
    - **First Name** - *Initials* Frame
    - **Last Name** - Service Account
    - **Email** - (Any e-mail address)
-   - **Password** - nutanix/4u
+   - **Password** - Nutanix/4u! (Due to password policies)
    - Under **Roles**, select **User Admin** and **Prism Central Admin**
 
    .. figure:: images/1.png
@@ -98,9 +98,9 @@ Frame uses Prism Central Categories to allow the Cloud Connector Appliance to id
    - **Purpose** - Allowing resource access based on Application Team
    - **Values**
 
-      - Instance
-      - Template
-      - MasterTemplate
+     - Instance
+     - Template
+     - MasterTemplate
 
    .. note::
 
@@ -114,7 +114,7 @@ Frame uses Prism Central Categories to allow the Cloud Connector Appliance to id
 
 #. Select **Actions > Manage Categories** and add the **FrameRole:MasterTemplate** value to the VM. The Frame CCA will later search for VMs with this category value. Click **Save**.
 
-   .. figure:: images/2c.png
+   .. figure:: images/2d.png
 
 Creating the CCA VM
 +++++++++++++++++++
@@ -137,7 +137,7 @@ The CCA is distributed as a bootable ISO image, not a disk image.
 
    - Beside **Disks > CD-ROM**, select :fa:`pencil`
       - **Operation** - Clone from Image Service
-      - **Image** - FrameCCA-2.1.6.iso
+      - **Image** - FrameCCA-3.0.0.iso
       - Select **Update**
 
    - Select **+ Add New Disk**
@@ -173,22 +173,30 @@ Configuring the CCA
 #. Fill in the following fields and click **Log In** to connect the CCA to your Nutanix environment:
 
    - **Username** - Previously created *Initials*\ -FramceSvc account
-   - **Password** - nutanix/4u
+   - **Password** - Nutanix/4u!
    - **Prism Central URL** - \https://<*Prism Central IP*>:9440
 
    .. figure:: images/4.png
 
-#. Under **Select Cluster**, fill in the following fields and click **Next**:
+#. Leave the **Configure this CCA to use a Proxy Server** disabled and click **Continue**
+
+#. In the **Would you like to Connect or Attach appliance to Frame?** click **Connect Appliance to Frame**
+
+#. Under **Select Cluster**, fill in the following fields and click **Verify**:
 
    - **Cluster for virtual desktops** - *Your assigned cluster*
    - **Network for virtual desktops** - Primary
    - **Cloud account name** - *Initials*\ -\ *Cluster-Name*
+   - **Prism Element Username** - admin
+   - **Prism Element Password** - *The corresponding password*
 
-   .. figure:: images/5b.png
+   .. figure:: images/5c.png
 
    .. note::
 
       You do not need to select **Enable enterprise profiles and personal drives** as this feature will not be used in the following exercises.
+
+#. Click **Next**
 
 #. Under **Define Instance Types**, edit the existing profile name to **AHV 2vCPU 4GB** to better reflect the configuration. Add an additional custom **Instance Type**. Click **Next**.
 
@@ -198,11 +206,11 @@ Configuring the CCA
 
 #. Under **Select Sandbox Templates**, your *Initials*\ **-GoldImage** VM should automatically appear based on the **MasterTemplate** category value previously applied. Select the VM and specify **Windows 10** from the **OS** drop down. Click **Next**.
 
-   .. figure:: images/7.png
+   .. figure:: images/7a.png
 
-#. The final step is to link your local infrastructure to the hosted Frame backplane. Under **Connect to Frame**, select **Sign in with My Nutanix** and provide your My Nutanix credentials if prompted. Once logged in, select the pre-created **nutanix.com Customer** and click **Finish**.
+#. The final step is to link your local infrastructure to the hosted Frame backplane. Under **Connect to Frame**, select **Sign in with My Nutanix** and provide your My Nutanix credentials if prompted. Once logged in, select **Organisation** and select *your created organisation* and click **Finish**. If all went well, you will see the below screenshot
 
-   .. figure:: images/8.png
+   .. figure:: images/8a.png
 
    .. note::
 

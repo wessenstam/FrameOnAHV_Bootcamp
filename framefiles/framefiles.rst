@@ -50,7 +50,9 @@ Users can attach cloud storage accounts from Google Drive, Dropbox, OneDrive, or
 
    .. figure:: images/6.png
 
-#. Return to your Launchpad and then **Resume** your disconnected session.
+#. Return to your Launchpad and then **Resume** your disconnected session in the bottom connection bar.
+
+   .. figure:: images/updates/6a.png
 
 #. Open **Frame Explorer** and note your cloud storage has been automatically mounted as a network drive (e.g. F:, G:, etc.).
 
@@ -92,6 +94,7 @@ For the purposes of saving time and resources, a Nutanix Files instance has alre
 
    - Select **Enable Access Based Enumeration (ABE)**
    - Select **Self Service Restore**
+   - Leave the rest default
 
    .. note::
 
@@ -110,6 +113,8 @@ For the purposes of saving time and resources, a Nutanix Files instance has alre
      .. note::
 
        To learn more about Files capabilities, including Quotas, Antivirus integration, monitoring, and more, see the `Nutanix Files Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Files-v3_6:Files-v3_6>`_ on the Nutanix Portal.
+
+#. Click **Close**
 
 #. From your Frame desktop, validate you can access ``\\BootcampFS.ntnxlab.local\Initials-DepartmentShare\`` from File Explorer. When prompted for credentials, authenticate using the following:
 
@@ -133,3 +138,53 @@ For the purposes of saving time and resources, a Nutanix Files instance has alre
 #. If prompted to **Enable File Analytics**, provide the NTNXLAB\\Administrator credentials and click **Enable**.
 
    .. figure:: images/13.png
+
+#. After a few minutes the Dashboard will start to populate the graphs.
+
+   .. figure:: images/updates/14.png
+
+   .. note::
+      If after 5 minutes there is still no populated graphs, run a **Scan** action by following these steps:
+      - Click the :fa:`gear` icon in the top right corner
+      - Select Scan File System
+      - Select your *Initials*-\**DepartmentShare**
+      - Click **Scan**. The status will change into **In Progress**
+      - If the status has returned to **Completed**, close the message box by clicking the **X** symbol in the top right corner. In rare cases the status returns to **Not Started**, just close the message box.
+      - Refresh your browser, the graphs should now be populated.
+
+Using File Analytics for Audit Trails
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Analytics can be used to see what users have done on their accessible shares. 
+
+#. In the File Analytics, click **Audit Trails** 
+#. Select **Users** 
+#. Use **devuser01** as the user in the search bar and click **Search**
+
+   .. figure:: images/updates/15.png
+
+#. Click on the **View Audit** text, next to your *Initials*\-**DepartmentShare** to see the actions
+
+   .. figure:: images/updates/16.png
+
+#. All actions should be familiar as they have been taken by you when you extracted the downloaded SampleData_Small.zip file earlier in the workshop.
+
+   .. figure:: images/updates/17.png
+
+
+This concludes the module on Frame and using external storage. Being cloud storage or on-prem Nutanix Files
+
+------
+
+Takeaways
++++++++++
+
+What are the key things learned in this exercise?
+
+- How to work with files and folders using
+  
+  - Direct upload/download into/from a Frame session
+  - Google drive (as example, more are supported)
+  - Nutanix File Server
+
+- Using File Analytics to get more detailed inforamtion as well as Audit trails.

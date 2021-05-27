@@ -14,36 +14,44 @@ Now that you have registered and associated your AHV cluster to your customer en
 Deploying a Desktop Pool
 ++++++++++++++++++++++++
 
-#. From the **Xi Frame** portal, select **Accounts** from the left hand menu and click **Add Account**.
+#. From the **Xi Frame** portal, select **Accounts** from the left hand menu and click **Create Account**.
 
 #. Under **Region and Network**, fill out the following fields and click **Next**:
 
+   - **Organization** - Your created orgnization
    - **Name** - *Initials*\ -W10NP
    - **URL name** - (Default, based on Name)
-   - **Cloud Provider** - Nutanix
+   - **Cloud Provider** - Nutanix-AHV
    - **Region** - *The Cloud Account Name previously configured through the CCA*
 
-   .. figure:: images/1b.png
+   .. figure:: images/updates/1.png
 
-#. Under **Configuration**, note the available options correspond to your CCA selections. Choose an **Instance Type** and increase the slider value to provide more storage capacity to the VMs. Do **NOT** select **Persistent desktop**. Click **Next**.
+#. Under **Configuration**, note the available options correspond to your CCA selections. 
+   - Select **Bring your own base image**
+   - Select **Windows 10** under *Base image family*
+   - Select your *Initials*\**-GoldImage** under *Base image*
+   - Choose an **Instance Type** 
+   - Increase the slider value to provide more storage capacity to the VMs. 
+   - Leave the *Initial capacity* at 1
+   - Do **NOT** select **Persistent desktop**
 
-   .. figure:: images/2.png
+   .. figure:: images/updates/2.png
 
    .. note::
 
-     *If each user sessions utilizes a dedicated VM, as in traditional VDI (rather than a shared model like RDS or XenApp), why does Frame use Windows Server OS images?*
+      Microsoft has made some adjustments in their Windows licensing so Xi Frame is able to support Windows 10 on Azure and Nutanix AHV. Customers must bring their own Microsoft VDA licenses for Windows 10.
 
-     Historically, due to Microsoft Windows licensing restrictions, AWS and Azure provide Windows Server OS images. The Windows Server images are presented with a familiar Windows desktop UI, and generally support all of the same applications.
+#. Click **Next**
 
-     Microsoft has made some adjustments in their Windows licensing so Xi Frame is able to support Windows 10 on Azure and Nutanix AHV. Customers must bring their own Microsoft VDA licenses for Windows 10.
+#. Click **Create** to begin provisioning the pool based on your selections, including a Sandbox VM. This process takes about 2-5 minutes. You can follow the process by clicking the blus spinning circle in the top right corner
 
-#. Click **Create** to begin provisioning the pool based on your selections, including a Sandbox VM.
+   .. figure:: images/updates/3.png
 
    Your Sandbox is a special instance that serves as the basis for creating all of your production instances. Its disk is often called a “Gold Master” or “Master Image.” When you launch the Sandbox desktop, you have full admin access to install new apps or apply system updates.
 
 #. From the **Accounts** page, select the previously created account to view the **Summary** dashboard.
 
-   .. figure:: images/4.png
+   .. figure:: images/updates/4.png
 
    In the following exercises we'll complete configuration of this pool of Xi Frame resources, exploring more of the Xi Frame administrative portal.
 
@@ -54,13 +62,13 @@ Configuring Capacity
 
    Frame provides considerable flexibility to define the minimum and maximum number of available desktops, allowing administrators to balance cost and instant availability. Capacity can also be configured on a per Instance Type basis.
 
-#. Hover over the :fa:`info-circle` icons to understand the different controls available.
+#. Hover over the :fa:`question-circle` icons to understand the different controls available.
 
    As each VM supports 1 concurrent user in Frame, the number of concurrent users supported by a production pool should equal the **Max number of instances**.
 
 #. On the **AHV 2vCPU 4GB** tab, increase the **Buffer instances** to **1** and **Max number of instances** to **3**. Click **Save > Confirm**.
 
-   .. figure:: images/5.png
+   .. figure:: images/updates/5.png
 
    Increasing **Buffer instances** to 1 directs Frame to have at least one VM powered on and available for the next user. As each user connects into a Frame session, Frame will power on the next VM to maintain **Buffer instances** = 1 (until the **Max number of instances** of 3 is reached).
 
@@ -68,11 +76,9 @@ Configuring Capacity
 
      For Cloud hosted desktops, each VM that is powered on results in a VM charge by AWS, Azure or GCP, regardless of whether the VM is being used. Unless there are justifiable reasons, the **Minimum number of instances** powered on and **Buffer instances** values should be set to 0 for Default capacity. If these two parameters are greater than 0, then AWS, Azure, and GCP will charge for those powered on VMs.
 
-#. Click **Save**.
-
 #. Under **Active capacity**, observe you can configure separate capacity policy to accommodate usage during peak periods (e.g. weekdays vs. weekends). **Leave the default selections.**
 
-   .. figure:: images/6.png
+   .. figure:: images/updates/6.png
 
 #. Once you have configured capacity for your pool, the template or "Gold Image" can be published, allowing desktop VMs to be created. Select **Sandbox** from the sidebar and click **Publish > Publish**.
 
@@ -134,6 +140,8 @@ Additionally, the Account Administrator can use Role-Based Access Control (RBAC)
 #. Select an alternate background image (or upload your own) to visually differentiate the two Launchpads.
 
    If Account Administrators wish to deliver individual applications (common when supporting task work or delivering applications into an existing desktop environment such as a corporate laptop), then an application Launchpad is appropriate. For user groups that are more comfortable with a desktop (even if it is non-persistent session and user data and files need to be persisted in a file server or cloud storage), then the Account Administrator can offer a Desktop Launchpad.
+
+#. After you've finished making any customizations to your Launchpad, click **Save**.
 
 Exploring Settings
 ++++++++++++++++++
@@ -222,7 +230,7 @@ In this exercise, you will connect to your Frame desktop as an end user. The dia
 
 #. From the toolbar, select your name in the upper right hand drop down menu and click **Logout**.
 
-#. To log back into the environment as a user, open your **You’ve been invited to join Nutanix Frame** e-mail. Launch the **Get Started** link and provide your name and a password.
+#. To log back into the environment as a user, open your **You’ve been invited to join Nutanix Frame** e-mail. Launch the **Get Started** link and provide your name and a password you would like to use.
 
    .. figure:: images/19.png
 
@@ -275,13 +283,13 @@ Adding New Applications
 
 Frame makes it very simple to customize your "Gold" image and add new applications.
 
-#. Leave your connection to your Frame desktop running. Open https://frame.nutanix.com in a new browser tab and **Log off** of the user account.
+#. Leave your connection to your Frame desktop running. Open https://frame.nutanix.com in a new browser tab (NOT in the Frame Session) and **Log off** of the user account.
 
-#. When prompted, click **Sign in with My Nutanix** and provide your My Nutanix credentials. From your username drop down menu, click **Go to Dashboard** to access the Xi Frame administrator portal.
+#. When prompted, click **Sign in with My Nutanix** and provide your My Nutanix credentials. 
+ 
+#. In the Frame interface, click **Accounts** in the sidebar and click the Account that you have been using.
 
-   .. figure:: images/24.png
-
-#. Select **Sandbox** from the sidebar and click **Power on** to boot the Sandbox VM.
+#. Select **Sandbox** from the sidebar and click **Power on** to boot the Sandbox VM. The process will take approx. 5 minutes
 
 #. When the **Status** changes to **Running**, click **Start session** to launch the connection to your Sandbox VM.
 
@@ -313,7 +321,7 @@ Frame makes it very simple to customize your "Gold" image and add new applicatio
 
    Next we will publish our changes to the Sandbox image to allow users to access the new applications.
 
-#. Under **Sandbox**, click :fa:`ellipsis-v` **> Close Session** to end the active Sandbox session.
+#. Under **Sandbox**, click :fa:`ellipsis-v` **> Close Session** to end the active Sandbox session. Wait till the text **Start session** becomes "clickable"
 
 #. Click **Publish > Publish** to roll out your updated image.
 
@@ -323,10 +331,31 @@ Frame makes it very simple to customize your "Gold" image and add new applicatio
 
    .. figure:: images/29.png
 
-#. Once the updated image has been published, return to your user Desktop session and click :fa:`gear` **> Close Session > Close Session** to terminate the session. Return to the **Applications** Launchpad and launch one of your new applications.
+   .. note::
+      The shown screenshot is just an example
+
+
+#. Once the updated image has been published, return to your user Desktop session and click :fa:`gear` **> Close Session > Close Session** to terminate the session. Return to the **Applications** Launchpad and launch one of your new applications. 
 
    .. note::
+      You may have to refresh your browser to see the new Applications due to caching of the browser.
 
       This session may take slightly longer to start, as VM resources may not yet be pre-booted according to the Capacity configuration. You can verify this on the **Status** page in the **Xi Frame** portal.
 
    In minutes you've rolled out an updated image to your resource pool, without interrupting on-going sessions.
+
+-------
+
+Takeaways
++++++++++
+
+What are the key things learned in this exercise?
+
+- Creating a Desktop pool
+- Changing the Desktop pools settings
+- Configure launchpads for Frame
+- Looking at the settings you can manipulate in the Frame dashboard
+- Add Users
+- Publish the sessions
+- Running Frame sessions
+- Adding applications using the Sandbox "Master" and publishing the new applications
